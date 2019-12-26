@@ -6,13 +6,25 @@
 
 .dropdown .menu-title {
     width: 150px;
+    color: white;
     border: 1px solid black;
+    background-image: linear-gradient(#444, #111);
+    background-color: #111;
+    border-radius: 6px;
+    box-shadow: 0 1px 1px #777;
 }
 
 .dropdown-expand {
+    opacity: 0;
     display: none;
 }
 
-.dropdown:hover .dropdown-expand {
-    transform: 
+.active {
+    display: block;
+    opacity: 1;
+    transition: opacity .8s ease-in-out;
+}
+
+ul {
+    list-style: none;
 }
