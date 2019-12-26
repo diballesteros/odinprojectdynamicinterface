@@ -1,0 +1,18 @@
+.dropdown {
+    width: 150px;
+    margin-left: 20px;
+    text-align: center;
+}
+
+.dropdown .menu-title {
+    width: 150px;
+    border: 1px solid black;
+}
+
+.dropdown-expand {
+    display: none;
+}
+
+.dropdown:hover .dropdown-expand {
+    transform: 
+}
