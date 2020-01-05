@@ -67,6 +67,20 @@ li {
 #pictureframe {
     height: 90%;
     width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-item {
+    margin: 50px;
+}
+
+.image-item  img{
+    width: 300px;
+    height: 300px;
 }
 
 #slider-controls {
@@ -75,6 +89,7 @@ li {
     justify-content: space-between;
     align-items: center;
     height: 10%;
+    border-top: 1px solid black;
 }
 
 #backward {
