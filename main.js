@@ -28,7 +28,24 @@ const ImageSlider = (() => {
         for (let i = 0; i < images.length; i++) {
             pictureFrame.appendChild(createImageElement(images[i], i));
         };
+
+        setBubbles();
     };
+
+    const setBubbles = () => {
+        const bubbles = document.getElementById('bubbles');
+
+        for (let i = 0; i < images.length; i++) {
+            bubbles.appendChild(createBubbleElement(i));
+        };
+    }
+
+    const createBubbleElement = function(index) {
+        const newBubbleElement = document.createElement('span');
+        newBubbleElement.className = "bubble";
+        newBubbleElement.id = `bubble-${index}`;
+        return newBubbleElement;
+    }
 
     const createImageElement = function (image, index) {
         const newImageElement = document.createElement('div');
