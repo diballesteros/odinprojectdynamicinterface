@@ -11,22 +11,34 @@ const ImageSlider = (() => {
     let currentPosition = 0;
 
     const transitionBackwards = () => {
-
+        currentFloat = parseFloat(getComputedStyle(document.getElementById('image-container')).left);
+        if (currentPosition > 0) {
+            document.getElementById('image-container').style.left = currentFloat + 500 + 'px';
+            toggleColorBubble(currentPosition);
+            currentPosition--;
+            toggleColorBubble(currentPosition);
+        };
     };
 
     const transitionForwards = () => {
-
+        currentFloat = parseFloat(getComputedStyle(document.getElementById('image-container')).left);
+        if (currentPosition < images.length - 1) {
+            document.getElementById('image-container').style.left = currentFloat - 500 + 'px';
+            toggleColorBubble(currentPosition);
+            currentPosition++;
+            toggleColorBubble(currentPosition);
+        };
     };
-   
+
     const changeImage = () => {
 
     };
 
     const setImages = () => {
-        const pictureFrame = document.getElementById('pictureframe');
+        const imageContainer = document.getElementById('image-container');
 
         for (let i = 0; i < images.length; i++) {
-            pictureFrame.appendChild(createImageElement(images[i], i));
+            imageContainer.appendChild(createImageElement(images[i], i));
         };
 
         setBubbles();
@@ -38,13 +50,19 @@ const ImageSlider = (() => {
         for (let i = 0; i < images.length; i++) {
             bubbles.appendChild(createBubbleElement(i));
         };
+
+        toggleColorBubble(currentPosition);
     }
 
-    const createBubbleElement = function(index) {
+    const createBubbleElement = function (index) {
         const newBubbleElement = document.createElement('span');
         newBubbleElement.className = "bubble";
         newBubbleElement.id = `bubble-${index}`;
         return newBubbleElement;
+    }
+
+    const toggleColorBubble = function (index) {
+        document.getElementById(`bubble-${index}`).classList.toggle('active-bubble');
     }
 
     const createImageElement = function (image, index) {
