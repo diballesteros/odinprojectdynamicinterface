@@ -10,28 +10,36 @@ const ImageSlider = (() => {
     const images = [];
     let currentPosition = 0;
 
-    const transitionBackwards = () => {
+    const transitionBackwards = (event, slideAmount) => {
+        slideAmount = slideAmount ? slideAmount : 1;
         currentFloat = parseFloat(getComputedStyle(document.getElementById('image-container')).left);
         if (currentPosition > 0) {
-            document.getElementById('image-container').style.left = currentFloat + 500 + 'px';
+            document.getElementById('image-container').style.left = (currentFloat + 500 * slideAmount) + 'px';
             toggleColorBubble(currentPosition);
-            currentPosition--;
+            currentPosition-=slideAmount;
             toggleColorBubble(currentPosition);
         };
     };
 
-    const transitionForwards = () => {
+    const transitionForwards = (event, slideAmount) => {
+        slideAmount = slideAmount ? slideAmount : 1;
         currentFloat = parseFloat(getComputedStyle(document.getElementById('image-container')).left);
         if (currentPosition < images.length - 1) {
-            document.getElementById('image-container').style.left = currentFloat - 500 + 'px';
+            document.getElementById('image-container').style.left = (currentFloat - 500 * slideAmount) + 'px';
             toggleColorBubble(currentPosition);
-            currentPosition++;
+            currentPosition+=slideAmount;
             toggleColorBubble(currentPosition);
         };
     };
 
     const changeImage = () => {
-
+       const tempIdArray = event.target.id.split('-');
+        const tempId = Number(tempIdArray[1])
+       if (tempId > currentPosition) {
+            transitionForwards(null, tempId - currentPosition);
+       } else if (tempId < currentPosition) {
+            transitionBackwards(null, currentPosition - tempId);
+       }
     };
 
     const setImages = () => {
@@ -49,6 +57,7 @@ const ImageSlider = (() => {
 
         for (let i = 0; i < images.length; i++) {
             bubbles.appendChild(createBubbleElement(i));
+            document.getElementById(`bubble-${i}`).addEventListener('click', changeImage);
         };
 
         toggleColorBubble(currentPosition);
