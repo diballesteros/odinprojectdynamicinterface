@@ -16,7 +16,7 @@ const ImageSlider = (() => {
         if (currentPosition > 0) {
             document.getElementById('image-container').style.left = (currentLeft + 500 * slideAmount) + 'px';
             toggleColorBubble(currentPosition);
-            currentPosition-=slideAmount;
+            currentPosition -= slideAmount;
             toggleColorBubble(currentPosition);
         };
     };
@@ -27,19 +27,19 @@ const ImageSlider = (() => {
         if (currentPosition < images.length - 1) {
             document.getElementById('image-container').style.left = (currentLeft - 500 * slideAmount) + 'px';
             toggleColorBubble(currentPosition);
-            currentPosition+=slideAmount;
+            currentPosition += slideAmount;
             toggleColorBubble(currentPosition);
         };
     };
 
     const changeImage = () => {
-       const tempIdArray = event.target.id.split('-');
+        const tempIdArray = event.target.id.split('-');
         const tempId = Number(tempIdArray[1])
-       if (tempId > currentPosition) {
+        if (tempId > currentPosition) {
             transitionForwards(null, tempId - currentPosition);
-       } else if (tempId < currentPosition) {
+        } else if (tempId < currentPosition) {
             transitionBackwards(null, currentPosition - tempId);
-       }
+        }
     };
 
     const setImages = () => {
@@ -102,7 +102,7 @@ const Image = function (source, name) {
     };
 };
 
-const timedSlider = function() {
+const timedSlider = function () {
     ImageSlider.transitionForwards();
 
     setTimeout(timedSlider, 5000);
