@@ -12,9 +12,9 @@ const ImageSlider = (() => {
 
     const transitionBackwards = (event, slideAmount) => {
         slideAmount = slideAmount ? slideAmount : 1;
-        currentFloat = parseFloat(getComputedStyle(document.getElementById('image-container')).left);
+        currentLeft = parseFloat(getComputedStyle(document.getElementById('image-container')).left);
         if (currentPosition > 0) {
-            document.getElementById('image-container').style.left = (currentFloat + 500 * slideAmount) + 'px';
+            document.getElementById('image-container').style.left = (currentLeft + 500 * slideAmount) + 'px';
             toggleColorBubble(currentPosition);
             currentPosition-=slideAmount;
             toggleColorBubble(currentPosition);
@@ -23,9 +23,9 @@ const ImageSlider = (() => {
 
     const transitionForwards = (event, slideAmount) => {
         slideAmount = slideAmount ? slideAmount : 1;
-        currentFloat = parseFloat(getComputedStyle(document.getElementById('image-container')).left);
+        currentLeft = parseFloat(getComputedStyle(document.getElementById('image-container')).left);
         if (currentPosition < images.length - 1) {
-            document.getElementById('image-container').style.left = (currentFloat - 500 * slideAmount) + 'px';
+            document.getElementById('image-container').style.left = (currentLeft - 500 * slideAmount) + 'px';
             toggleColorBubble(currentPosition);
             currentPosition+=slideAmount;
             toggleColorBubble(currentPosition);
@@ -87,7 +87,8 @@ const ImageSlider = (() => {
 
     return {
         images,
-        setImages
+        setImages,
+        transitionForwards
     };
 })();
 
@@ -101,6 +102,12 @@ const Image = function (source, name) {
     };
 };
 
+const timedSlider = function() {
+    ImageSlider.transitionForwards();
+
+    setTimeout(timedSlider, 5000);
+}
+
 const corgiOne = new Image('img/corgi1.jpg', 'first');
 const corgiTwo = new Image('img/corgi2.jpg', 'two');
 const corgiThree = new Image('img/corgi3.jpg', 'three');
@@ -108,3 +115,5 @@ const corgiThree = new Image('img/corgi3.jpg', 'three');
 ImageSlider.images.push(corgiOne, corgiTwo, corgiThree);
 
 ImageSlider.setImages();
+
+setTimeout(timedSlider, 5000);
